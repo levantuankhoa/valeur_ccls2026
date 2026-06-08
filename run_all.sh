@@ -61,4 +61,11 @@ python nei_plot.py \
     --lexicon warriner nrc \
     --out-prefix "${RES}/consensus"
 
+echo "▶ [7/8] EDA figure — lexicon word-level scatter"
+python plot_eda_lexicons.py \
+    --out "${RES}/eda_lexicons_scatter.png"
+
+echo "▶ [8/8] F1 annotated — Warriner trajectory (chief clerk vs Gregor death)"
+python plot_f1_annotated.py
+
 echo "✔ Pipeline complete. Artefacts in ${RES}/"

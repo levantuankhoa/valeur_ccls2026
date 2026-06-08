@@ -1,0 +1,11 @@
+﻿probe_a,probe_b,intersection,union,jaccard
+warriner,nrc,2,12,0.16666666666666666
+warriner,cr4_nrc,0,16,0.0
+warriner,cr4_nrcbert,0,13,0.0
+warriner,cr4_emo,3,10,0.3
+nrc,cr4_nrc,0,10,0.0
+nrc,cr4_nrcbert,0,7,0.0
+nrc,cr4_emo,2,5,0.4
+cr4_nrc,cr4_nrcbert,0,9,0.0
+cr4_nrc,cr4_emo,0,9,0.0
+cr4_nrcbert,cr4_emo,0,6,0.0

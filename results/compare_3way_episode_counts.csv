@@ -1,0 +1,6 @@
+probe,n_windows_flagged
+warriner,10
+nrc,4
+cr4_nrc,6
+STRICT_3way,0
+LENIENT_2of3,2

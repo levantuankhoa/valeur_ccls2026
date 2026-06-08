@@ -1,0 +1,11 @@
+probe_or_consensus,windows_flagged,episodes
+warriner,10,3
+nrc,4,2
+cr4_nrc,6,2
+cr4_nrcbert,3,1
+cr4_emo,3,1
+>=1_of_5,21,7
+>=2_of_5,3,1
+>=3_of_5,2,1
+>=4_of_5,0,0
+>=5_of_5,0,0

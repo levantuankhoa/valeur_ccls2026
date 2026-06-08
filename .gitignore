@@ -20,14 +20,18 @@ data/*.txt
 # data/NEI_Pipeline_Reference.md is .md, not blocked above
 
 # --- Models ---
-# Block large joblibs (regeneratable via train_vad.py)
+# Block large joblibs + numpy archives (regeneratable via train scripts)
 models/*.joblib
+models/*.npz
 # KEEP diagnostics JSON — small, lets reviewers see Pearson r without retraining
 !models/*.diagnostics.json
 
 # --- Results ---
-# Block bulky per-window CSVs (regeneratable via encode_vad.py)
+# Block bulky per-window CSVs (regeneratable via encode_vad.py / run_trial.py)
 results/*windows*.csv
+results/trial_warriner.csv
+results/trial_nrc.csv
+results/trial_cr4_nrc.csv
 # KEEP summary artefacts so poster auditor + reviewers can read without re-running:
 #   <lex>.nei.csv, <lex>.episodes.csv, <lex>.rois.csv, <lex>.plot.png, consensus.heatmap.png
 # (these match smaller, summary-tier outputs only)
