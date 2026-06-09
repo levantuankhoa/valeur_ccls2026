@@ -29,7 +29,7 @@ RANDOM_STATE   = 42
 TEST_SIZE         = 0.20
 ALPHAS            = (1e-6, 1e-4, 1e-2, 1e0, 1e2, 1e4, 1e6)  # RidgeCV grid
 N_BOOTSTRAP       = 2000
-N_PERMUTATION     = 2000
+N_PERMUTATION     = 500
 MIN_WORD_LENGTH   = 1   # drop single-char artefacts if desired
 
 # -----------------------------------------------------------------------------
