@@ -202,7 +202,7 @@ The gate enforces Gilbert & Allan's (1998) joint condition: *"strongly aroused f
 | Probe | V (r) | A (r) | D (r) | n\_train |
 |---|---|---|---|---|
 | Warriner | 0.812 | 0.651 | 0.710 | 11,132 |
-| NRC v2.1 | 0.761 | 0.634 | 0.695 | 16,005 |
+| NRC v2.1 | 0.761 | 0.634 | 0.695 |  35,781 |
 | CR4-NRC | 0.677 | 0.513 | 0.591 | 26,537 passages |
 
 All p < 0.002 (500-iteration permutation null). Full diagnostics in `models/*.diagnostics.json`.
