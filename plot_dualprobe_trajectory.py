@@ -140,7 +140,7 @@ def plot_dualprobe(dfw, dfn, neiw, nein):
 
     axes[1].set_xlabel("Window index (narrative progress →)", fontsize=10)
     fig.suptitle(
-        "Warriner and NRC v2.1 affective trajectories — Kafka, Die Verwandlung\n"
+        "Warriner and NRC v2.1 affective trajectories — Kafka, The Metamorphosis\n"
         "Both probes fire at the chief clerk scene (W167–168) and return NEI = 0 at Gregor's death",
         fontsize=10, y=1.005,
     )
@@ -198,7 +198,7 @@ def plot_consensus(dfw, dfn, neiw, nein):
     ax.set_xlabel("Window index (narrative progress →)", fontsize=10)
     ax.set_ylabel("NEI (Narrative Entrapment Index)", fontsize=10)
     ax.set_title(
-        "Cross-probe NEI consensus — Warriner vs NRC v2.1 on Die Verwandlung\n"
+        "Cross-probe NEI consensus — Warriner vs NRC v2.1 on The Metamorphosis\n"
         "Shaded: 3 episodes where both probes exceed their 95th-percentile threshold",
         fontsize=10,
     )

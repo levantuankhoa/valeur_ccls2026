@@ -98,7 +98,7 @@ def scatter_panel(ax, x, y, dim, color, word_r, n_words):
     traj_trial_r = TRAJECTORY_TRIAL_R[dim]
     label = (
         f"Word-level r = {word_r:.2f}  (n={n_words:,})\n"
-        f"Traj. r = {traj_r:.3f}  (Verwandlung)\n"
+        f"Traj. r = {traj_r:.3f}  (Metamorphosis)\n"
         f"Traj. r = {traj_trial_r:.3f}  (Trial)"
     )
     ax.text(
@@ -161,7 +161,7 @@ def main(out_path: Path) -> None:
         f"NRC VAD v2.1 vs Warriner (2013): Word-Level Agreement on {n:,} Overlapping Terms\n"
         "Warriner scores mapped to −1…+1 scale for comparison. "
         "Diagonal = perfect agreement. Annotations show word-level (this figure) "
-        "and trajectory-level (Verwandlung / Trial) Pearson r.",
+        "and trajectory-level (Metamorphosis / Trial) Pearson r.",
         fontsize=9, y=1.01
     )
 
@@ -169,7 +169,7 @@ def main(out_path: Path) -> None:
     fig.text(
         0.5, -0.04,
         "Dominance (D) shows the lowest word-level agreement (r ≈ 0.33) — consistent with Mohammad (2025) — "
-        "and diverges further at trajectory level (r = 0.19 on Verwandlung, r = 0.10 on The Trial), "
+        "and diverges further at trajectory level (r = 0.19 on The Metamorphosis, r = 0.10 on The Trial), "
         "revealing that contextual application via SBERT amplifies the structural D-disagreement inherent to the lexicons.",
         ha="center", fontsize=8, style="italic", wrap=True,
         bbox=dict(boxstyle="round,pad=0.4", facecolor="#fff8e7", alpha=0.9, edgecolor="#ccaa00")

@@ -176,7 +176,7 @@ def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
     ax.set_ylabel("V / A / D score (Warriner scale 1–9)", fontsize=10)
     ax.set_title(
         "Affective Trajectory — Warriner probe (gated_sum NEI)\n"
-        "Kafka, “Die Verwandlung” • Same probe, same formula, same text: "
+        "Kafka, “The Metamorphosis” • Same probe, same formula, same text: "
         "within-text discrimination of entrapment (chief clerk) vs. defeat (Gregor’s death)",
         fontsize=10
     )
