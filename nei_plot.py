@@ -159,7 +159,6 @@ def extract_contiguous_regions(mask: np.ndarray, min_duration: int = 1) -> List[
 def plot_trajectory(
     df: pd.DataFrame,
     V: np.ndarray, A: np.ndarray, D: np.ndarray,
-    rois: List[Tuple[int, int]],
     episodes: List[Tuple[int, int]],
     title: str,
     out_path: Path,
@@ -176,22 +175,15 @@ def plot_trajectory(
     l2, = ax.plot(x, A, label="Arousal",   linewidth=1.8, color="#ff7f0e", zorder=10)
     l3, = ax.plot(x, D, label="Dominance", linewidth=1.8, color="#2ca02c", zorder=10)
 
-    for (s, e) in rois:
-        ax.add_patch(mpatches.Rectangle(
-            (s - 0.5, ymin), e - s + 1, ymax - ymin,
-            facecolor="#9e9e9e", edgecolor="#4f4f4f", linewidth=1.4, alpha=0.22, zorder=1,
-        ))
     for (s, e) in episodes:
         ax.add_patch(mpatches.Rectangle(
             (s - 0.5, ymin), e - s + 1, ymax - ymin,
             facecolor="#ffb3d9", edgecolor="#ff3d81", linewidth=2.0, alpha=0.30, zorder=5,
         ))
 
-    conv_patch = mpatches.Patch(facecolor="#9e9e9e", edgecolor="#4f4f4f", alpha=0.22,
-                                label="VAD convergence (ROI)")
     entr_patch = mpatches.Patch(facecolor="#ffb3d9", edgecolor="#ff3d81", alpha=0.30,
                                 label="Entrapment episode")
-    ax.legend(handles=[l1, l2, l3, conv_patch, entr_patch], loc="upper left", framealpha=0.95)
+    ax.legend(handles=[l1, l2, l3, entr_patch], loc="upper left", framealpha=0.95)
     ax.set_xlabel("Window index (narrative progress →)")
     ax.set_ylabel("V / A / D score")
     ax.set_title(title)
@@ -297,7 +289,7 @@ def run_single(
     # --- Plot ---
     y_margin = 0.6 if lexicon == "warriner" else 0.15
     plot_trajectory(
-        df, V, A, D, rois, episodes,
+        df, V, A, D, episodes,
         title=f"Affective trajectory — {lexicon.capitalize()} ({method})",
         out_path=out_prefix.with_suffix(".plot.png"),
         y_margin=y_margin,

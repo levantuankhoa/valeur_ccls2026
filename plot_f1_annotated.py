@@ -19,7 +19,6 @@ Sources:
   windows:  results/windows_warriner.csv
   NEI data: results/warriner.nei.csv
   episodes: results/warriner.episodes.csv
-  rois:     results/warriner.rois.csv
   verified: paper1_writing/ground_truth/verify_gregor_death_output.txt
 
 Output:
@@ -63,16 +62,11 @@ def load_data():
     windows = pd.read_csv(RESULTS / "windows_warriner.csv", encoding="utf-8-sig")
     nei_df  = pd.read_csv(RESULTS / "warriner.nei.csv",     encoding="utf-8-sig")
     eps_df  = pd.read_csv(RESULTS / "warriner.episodes.csv", encoding="utf-8-sig")
-    rois_df = pd.read_csv(RESULTS / "warriner.rois.csv",    encoding="utf-8-sig")
-    return windows, nei_df, eps_df, rois_df
+    return windows, nei_df, eps_df
 
 
 def build_episode_ranges(eps_df):
     return [(int(r.start_window), int(r.end_window)) for _, r in eps_df.iterrows()]
-
-
-def build_roi_ranges(rois_df):
-    return [(int(r.start_window), int(r.end_window)) for _, r in rois_df.iterrows()]
 
 
 def add_zone_annotation(ax, w_start, w_end, ymin, ymax, label, label_y_frac,
@@ -101,7 +95,7 @@ def add_zone_annotation(ax, w_start, w_end, ymin, ymax, label, label_y_frac,
 
 
 def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
-           episodes, rois, out_path: Path) -> None:
+           episodes, out_path: Path) -> None:
 
     V = windows["Valence_Smooth"].values
     A = windows["Arousal_Smooth"].values
@@ -114,12 +108,7 @@ def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
 
     fig, ax = plt.subplots(figsize=(16, 5.5))
 
-    # --- Background regions: ROIs (gray) + episodes (pink) ---
-    for (s, e) in rois:
-        ax.add_patch(mpatches.Rectangle(
-            (s - 0.5, ymin), e - s + 1, ymax - ymin,
-            facecolor="#9e9e9e", edgecolor="#4f4f4f", linewidth=1.0, alpha=0.18, zorder=1,
-        ))
+    # --- Background regions: episodes (pink) ---
     for (s, e) in episodes:
         ax.add_patch(mpatches.Rectangle(
             (s - 0.5, ymin), e - s + 1, ymax - ymin,
@@ -171,8 +160,6 @@ def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
     l3, = ax.plot(x, D, label="Dominance", linewidth=1.8, color="#2ca02c", zorder=10)
 
     # --- Legend ---
-    conv_patch = mpatches.Patch(facecolor="#9e9e9e", edgecolor="#4f4f4f", alpha=0.4,
-                                label="VAD convergence (ROI)")
     entr_patch = mpatches.Patch(facecolor="#ffb3d9", edgecolor="#ff3d81", alpha=0.5,
                                 label="Entrapment episode")
     pos_patch  = mpatches.Patch(facecolor="#c0392b", edgecolor="#c0392b", alpha=0.2,
@@ -181,7 +168,7 @@ def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
                                 label="Death zone (negative control, NEI = 0)")
 
     ax.legend(
-        handles=[l1, l2, l3, conv_patch, entr_patch, pos_patch, neg_patch],
+        handles=[l1, l2, l3, entr_patch, pos_patch, neg_patch],
         loc="upper left", framealpha=0.95, fontsize=8, ncol=2,
     )
 
@@ -204,7 +191,7 @@ def render(windows: pd.DataFrame, nei_df: pd.DataFrame,
 
 
 def main(no_paper_copy: bool = False) -> None:
-    windows, nei_df, eps_df, rois_df = load_data()
+    windows, nei_df, eps_df = load_data()
 
     # Merge NEI columns into windows if not already present
     if "NEI" not in windows.columns and "NEI" in nei_df.columns:
@@ -214,10 +201,9 @@ def main(no_paper_copy: bool = False) -> None:
         )
 
     episodes = build_episode_ranges(eps_df)
-    rois     = build_roi_ranges(rois_df)
 
     out = RESULTS / "F1_warriner_trajectory_annotated.png"
-    render(windows, nei_df, episodes, rois, out)
+    render(windows, nei_df, episodes, out)
 
     # Copy to paper1_writing/figures/
     if not no_paper_copy:
