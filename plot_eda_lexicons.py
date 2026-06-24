@@ -78,8 +78,9 @@ def normalize_warriner(series: pd.Series) -> pd.Series:
 
 def scatter_panel(ax, x, y, dim, color, word_r, n_words):
     """Render one scatter panel with hexbin density + Pearson annotation."""
-    # Hexbin for density
-    hb = ax.hexbin(x, y, gridsize=50, cmap="Blues", mincnt=1, alpha=0.85, linewidths=0.2)
+    # Hexbin for density: opaque + log colour scale so the structure reads
+    # crisply instead of washing out to a pale cloud (linear bins + alpha).
+    hb = ax.hexbin(x, y, gridsize=50, cmap="Blues", mincnt=1, bins="log", linewidths=0.0)
 
     ax.set_xlabel(f"Warriner {DIM_LABELS[dim]} (mapped to −1…+1)", fontsize=9)
     ax.set_ylabel(f"NRC v2.1 {DIM_LABELS[dim]}", fontsize=9)
